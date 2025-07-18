@@ -1,1 +1,2 @@
-# daily-baekjoon
+# 💻 Baekjoon Algorithm Study
+
