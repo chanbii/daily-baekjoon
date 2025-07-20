@@ -9,22 +9,21 @@
 	- 만들 수 있는 자연수 N의 최댓값
 
 * 풀이 요약:
-1. i = 1부터 시작해서, S에서 계속 i를 차례로 빼나감
-2. 뺄 수 있을 때까지 반복하면서 i를 증가시킴
-3. 더 이상 뺄 수 없는 순간의 i값 - 1이 최대 개수 
+1. 자연수 N개를 더한 값은 1 + 2 + ... + n = n(n+1)/2
+2. n(n+1)/2 ≤ S 를 만족하는 n의 최댓값을 구함
+3. while문을 통해 위 조건을 만족하는 n까지 증가시킨 뒤, n - 1 출력 
 */
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
 int main(void) {
-	unsigned int s, i;
+	long long s, n = 1;
 
-	scanf("%d", &s);
+	scanf("%lld", &s);
 
-	for (i = 1; i <= s; i++)
-		s -= i;
+	while (n * (n + 1) / 2 <= s)
+		n++;
 
-	i--;
-	printf("%d", i);
+	printf("%lld\n", n - 1);
 }
