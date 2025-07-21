@@ -11,33 +11,35 @@
 
 * 풀이 요약:
 1. 각 테스트 케이스마다 A, B 입력
-2. 두 수 중 큰 수를 기준으로 시작해, 그 수에 자연수를 곱해가며 공배수를 찾음
-   - A < B일 경우, B에 1부터 곱해가며 A로 나누어 떨어지는지 확인
-   - 처음 나누어떨어지는 순간이 최소공배수
-3. 반복을 종료하고 해당 수를 출력
+2. 최소공배수 = (A × B) ÷ 최대공약수
+3. 최대공약수는 유클리드 호제법을 이용해 구함:
+     두 수 A, B에 대해 A를 B로 나눈 나머지를 계속 구하면서,
+     나머지가 0이 되었을 때 나누는 수 B가 최대공약수
+4. 계산한 최소공배수를 출력
 */
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
+int gcd(int a, int b) {
+	int temp;
+	while (b != 0) {
+		temp = a % b;
+		a = b;
+		b = temp;
+	}
+	return a;
+}
+
 int main(void) {
-	int T, A, B, i, j;
+	int T, A, B, result;
 
 	scanf("%d", &T);
 
-	for (i = 0; i < T; i++) {
+	while (T > 0) {
 		scanf("%d %d", &A, &B);
-		if (A < B) {
-			for (j = 1; j <= A; j++)
-				if (B * j % A == 0)
-					break;
-			printf("%d\n", B * j);
-		}
-		else {
-			for (j = 1; j <= B; j++)
-				if (A * j % B == 0)
-					break;
-			printf("%d\n", A * j);
-		}
+		result = A * B / gcd(A, B);
+		printf("%d\n", result);
+		T--;
 	}
 }
